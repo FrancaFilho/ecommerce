@@ -12,7 +12,7 @@
             $sql = new Sql();
             return $sql->select("SELECT * FROM tb_categories ORDER BY descategory");
         }
-        
+
         public function save()
         {
             $sql = new Sql();
@@ -39,6 +39,7 @@
             ]);
             Category::updateFile();
         }
+
         public static function updateFile()
         {
             $categories = Category::listAll();
@@ -48,6 +49,7 @@
             }
             file_put_contents($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . "views" . DIRECTORY_SEPARATOR . "categories-menu.html", implode('', $html));
         }
+        
         public function getProducts($related = true)
         {
             $sql = new Sql();

@@ -29,11 +29,7 @@
                 <div class="footer-menu">
                     <h2 class="footer-wid-title">Categorias</h2>
                     <ul>
-                        <li><a href="#">Cat Um</a></li>
-                        <li><a href="#">Cat Dois</a></li>
-                        <li><a href="#">Cat Três</a></li>
-                        <li><a href="#">Cat Quarto</a></li>
-                        <li><a href="#">Cat Cinco</a></li>
+                        <?php require $this->checkTemplate("categories-menu");?>
                     </ul>                        
                 </div>
             </div>
