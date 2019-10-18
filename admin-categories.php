@@ -63,6 +63,7 @@
 	});
 	$app->post("/adm/categories/:idcategory", function($idcategory){
 		User::verifyLogin();
+
 		$category = new Category();
 		$category->get((int)$idcategory);
 		$category->setData($_POST);
@@ -70,8 +71,10 @@
 		header('Location: /adm/categories');
 		exit;
 	});
+
 	$app->get("/adm/categories/:idcategory/products", function($idcategory){
 		User::verifyLogin();
+
 		$category = new Category();
 		$category->get((int)$idcategory);
 		$page = new PageAdm();
@@ -81,8 +84,10 @@
 			'productsNotRelated'=>$category->getProducts(false)
 		]);
 	});
+
 	$app->get("/adm/categories/:idcategory/products/:idproduct/add", function($idcategory, $idproduct){
 		User::verifyLogin();
+
 		$category = new Category();
 		$category->get((int)$idcategory);
 		$product = new Product();
@@ -91,6 +96,7 @@
 		header("Location: /adm/categories/".$idcategory."/products");
 		exit;
 	});
+	
 	$app->get("/adm/categories/:idcategory/products/:idproduct/remove", function($idcategory, $idproduct){
 		User::verifyLogin();
 		$category = new Category();

@@ -3,11 +3,12 @@
 	namespace franca\Model;
 	use \franca\DB\Sql;
 	use \franca\Model;
-	use \franca\Mailer;
 	use \franca\Model\User;
+
 	class Cart extends Model {
 		const SESSION = "Cart";
 		const SESSION_ERROR = "CartError";
+
 		public static function getFromSession()
 		{
 			$cart = new Cart();
@@ -31,10 +32,12 @@
 			}
 			return $cart;
 		}
+
 		public function setToSession()
 		{
 			$_SESSION[Cart::SESSION] = $this->getValues();
 		}
+
 		public function getFromSessionID()
 		{
 			$sql = new Sql();
@@ -86,7 +89,9 @@
 					':idproduct'=>$product->getidproduct()
 				]);
 			} else {
-				$sql->query("UPDATE tb_cartsproducts SET dtremoved = NOW() WHERE idcart = :idcart AND idproduct = :idproduct AND dtremoved IS NULL LIMIT 1", [
+				$sql->query("UPDATE tb_cartsproducts SET dtremoved = NOW() 
+				WHERE idcart = :idcart AND idproduct = :idproduct 
+				AND dtremoved IS NULL LIMIT 1", [
 					':idcart'=>$this->getidcart(),
 					':idproduct'=>$product->getidproduct()
 				]);
@@ -97,7 +102,8 @@
 		{
 			$sql = new Sql();
 			$rows = $sql->select("
-				SELECT b.idproduct, b.desproduct , b.vlprice, b.vlwidth, b.vlheight, b.vllength, b.vlweight, b.desurl, COUNT(*) AS nrqtd, SUM(b.vlprice) AS vltotal 
+				SELECT b.idproduct, b.desproduct , b.vlprice, b.vlwidth, b.vlheight, b.vllength, 
+				b.vlweight, b.desurl, COUNT(*) AS nrqtd, SUM(b.vlprice) AS vltotal 
 				FROM tb_cartsproducts a 
 				INNER JOIN tb_products b ON a.idproduct = b.idproduct 
 				WHERE a.idcart = :idcart AND a.dtremoved IS NULL 

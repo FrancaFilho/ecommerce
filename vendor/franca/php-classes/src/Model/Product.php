@@ -4,7 +4,7 @@
 
     use \franca\DB\Sql;
     use \franca\Model;
-    use \franca\Mailer;
+
 
     class Product extends Model {
         public static function listAll()
@@ -102,6 +102,7 @@
             imagedestroy($image);
             $this->checkPhoto();
         }
+
         public function getFromURL($desurl)
         {
             $sql = new Sql();
@@ -110,12 +111,14 @@
             ]);
             $this->setData($rows[0]);
         }
+
         public function getCategories()
         {
             $sql = new Sql();
             return $sql->select("
-                SELECT * FROM tb_categories a INNER JOIN tb_productscategories b ON a.idcategory = b.idcategory WHERE b.idproduct = :idproduct
-            ", [
+                SELECT * FROM tb_categories a INNER JOIN tb_productscategories b 
+                ON a.idcategory = b.idcategory WHERE b.idproduct = :idproduct
+                ", [
                 ':idproduct'=>$this->getidproduct()
             ]);
         }
