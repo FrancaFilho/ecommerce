@@ -165,6 +165,7 @@ $app->post("/checkout", function(){
 	$address->save();
 	$cart = Cart::getFromSession();
 	$cart->getCalculateTotal();
+
 	$order = new Order();
 	$order->setData([
 		'idcart'=>$cart->getidcart(),
@@ -356,15 +357,18 @@ $app->post("/profile", function(){
 	header('Location: /profile');
 	exit;
 });
+
 $app->get("/order/:idorder", function($idorder){
 	User::verifyLogin(false);
 	$order = new Order();
 	$order->get((int)$idorder);
+
 	$page = new Page();
 	$page->setTpl("payment", [
 		'order'=>$order->getValues()
 	]);
 });
+
 $app->get("/boleto/:idorder", function($idorder){
 	User::verifyLogin(false);
 	$order = new Order();
@@ -388,7 +392,7 @@ $app->get("/boleto/:idorder", function($idorder){
 	$dadosboleto["endereco1"] = $order->getdesaddress() . " " . $order->getdesdistrict();
 	$dadosboleto["endereco2"] = $order->getdescity() . " - " . $order->getdesstate() . " - " . $order->getdescountry() . " -  CEP: " . $order->getdeszipcode();
 	// INFORMACOES PARA O CLIENTE
-	$dadosboleto["demonstrativo1"] = "Pagamento de Compra na Loja franca E-commerce";
+	$dadosboleto["demonstrativo1"] = "Pagamento de Compra na Loja França E-commerce";
 	$dadosboleto["demonstrativo2"] = "Taxa bancária - R$ 0,00";
 	$dadosboleto["demonstrativo3"] = "";
 	$dadosboleto["instrucoes1"] = "- Sr. Caixa, cobrar multa de 2% após o vencimento";

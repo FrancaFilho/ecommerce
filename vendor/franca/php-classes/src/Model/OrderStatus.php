@@ -1,8 +1,10 @@
 <?php
 
 namespace franca\Model;
+
 use \franca\DB\Sql;
 use \franca\Model;
+
 class OrderStatus extends Model {
 	const EM_ABERTO = 1;
 	const AGUARDANDO_PAGAMENTO = 2;
