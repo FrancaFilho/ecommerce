@@ -275,7 +275,7 @@ $app->post("/register", function(){
 		'nrphone'=>$_POST['phone']
 	]);
 	$user->save();
-	User::login($_POST['email'], $_POST['password']);
+	User::login($_POST['email'], $_POST['password']); //logando
 	header('Location: /checkout');
 	exit;
 });
@@ -283,11 +283,13 @@ $app->get("/forgot", function() {
 	$page = new Page();
 	$page->setTpl("forgot");	
 });
+
 $app->post("/forgot", function(){
 	$user = User::getForgot($_POST["email"], false);
 	header("Location: /forgot/sent");
 	exit;
 });
+
 $app->get("/forgot/sent", function(){
 	$page = new Page();
 	$page->setTpl("forgot-sent");	
@@ -310,6 +312,7 @@ $app->post("/forgot/reset", function(){
 	$page = new Page();
 	$page->setTpl("forgot-reset-success");
 });
+
 $app->get("/profile", function(){
 	User::verifyLogin(false);
 	$user = User::getFromSession();
@@ -320,6 +323,7 @@ $app->get("/profile", function(){
 		'profileError'=>User::getError()
 	]);
 });
+
 $app->post("/profile", function(){
 	User::verifyLogin(false);
 	if (!isset($_POST['desperson']) || $_POST['desperson'] === '') {
@@ -332,6 +336,7 @@ $app->post("/profile", function(){
 		header('Location: /profile');
 		exit;
 	}
+
 	$user = User::getFromSession();
 	if ($_POST['desemail'] !== $user->getdesemail()) {
 		if (User::checkLoginExists($_POST['desemail']) === true) {
@@ -340,11 +345,13 @@ $app->post("/profile", function(){
 			exit;
 		}
 	}
+	
 	$_POST['inadmin'] = $user->getinadmin();
 	$_POST['despassword'] = $user->getdespassword();
 	$_POST['deslogin'] = $_POST['desemail'];
 	$user->setData($_POST);
-	$user->save();
+	//$user->save();
+	$user->update();
 	User::setSuccess("Dados alterados com sucesso!");
 	header('Location: /profile');
 	exit;

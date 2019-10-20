@@ -1,10 +1,12 @@
 <?php
 
 	namespace franca\Model;
+
 	use \franca\DB\Sql;
 	use \franca\Model;
 	class Address extends Model {
 		const SESSION_ERROR = "AddressError";
+		
 		public static function getCEP($nrcep)
 		{
 			$nrcep = str_replace("-", "", $nrcep);
