@@ -12,15 +12,18 @@
 	{
 		return date('d/m/Y', strtotime($date));
 	}
+
 	function checkLogin($inadm = true)
 	{
 		return User::checkLogin($inadm);
 	}
+
 	function getUserName()
 	{
 		$user = User::getFromSession();
 		return $user->getdesperson();
 	}
+	
 	function getCartNrQtd()
 	{
 		$cart = Cart::getFromSession();
