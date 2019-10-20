@@ -413,11 +413,11 @@ $app->get("/boleto/:idorder", function($idorder){
 	// DADOS PERSONALIZADOS - ITAÚ
 	$dadosboleto["carteira"] = "175";  // Código da Carteira: pode ser 175, 174, 104, 109, 178, ou 157
 	// SEUS DADOS
-	$dadosboleto["identificacao"] = "franca Treinamentos";
-	$dadosboleto["cpf_cnpj"] = "24.700.731/0001-08";
-	$dadosboleto["endereco"] = "Rua Ademar Saraiva Leão, 234 - Alvarenga, 09853-120";
-	$dadosboleto["cidade_uf"] = "São Bernardo do Campo - SP";
-	$dadosboleto["cedente"] = "franca TREINAMENTOS LTDA - ME";
+	$dadosboleto["identificacao"] = "França Store";
+	$dadosboleto["cpf_cnpj"] = "00.000.000/0000-00";
+	$dadosboleto["endereco"] = "CSB 4, Lotes 2 a 6 - Taguatinga Sul, 72015-942";
+	$dadosboleto["cidade_uf"] = "Taguatinga - DF";
+	$dadosboleto["cedente"] = "França Store LTDA - ME";
 	// NÃO ALTERAR!
 	$path = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . "res" . DIRECTORY_SEPARATOR . "boletophp" . DIRECTORY_SEPARATOR . "include" . DIRECTORY_SEPARATOR;
 	require_once($path . "funcoes_itau.php");

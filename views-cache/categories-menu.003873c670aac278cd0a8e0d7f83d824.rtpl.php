@@ -1,1 +1,0 @@
-<?php if(!class_exists('Rain\Tpl')){exit;}?><li><a href="/categories/2">Maquiagens</a></li><li><a href="/categories/1">Perfumarias</a></li>
