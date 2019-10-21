@@ -70,7 +70,7 @@
         {
             if (!User::checkLogin($inadmin)) {
                 if ($inadmin) {
-                    header("Location: /admin/login");
+                    header("Location: /adm/login");
                 } else {
                     header("Location: /login");
                 }

@@ -12,7 +12,6 @@
             $sql = new Sql();
             return $sql->select("SELECT * FROM tb_products ORDER BY desproduct");
         }
-
         public static function checkList($list)
         {
             foreach ($list as &$row) {
@@ -23,7 +22,6 @@
             }
             return $list;
         }
-        
         public function save()
         {
             $sql = new Sql();
@@ -70,12 +68,14 @@
             }
             return $this->setdesphoto($url);
         }
+        
         public function getValues()
         {
             $this->checkPhoto();
             $values = parent::getValues();
             return $values;
         }
+
         public function setPhoto($file)
         {
             $extension = explode('.', $file['name']);
@@ -102,7 +102,6 @@
             imagedestroy($image);
             $this->checkPhoto();
         }
-
         public function getFromURL($desurl)
         {
             $sql = new Sql();
@@ -111,14 +110,12 @@
             ]);
             $this->setData($rows[0]);
         }
-
         public function getCategories()
         {
             $sql = new Sql();
             return $sql->select("
-                SELECT * FROM tb_categories a INNER JOIN tb_productscategories b 
-                ON a.idcategory = b.idcategory WHERE b.idproduct = :idproduct
-                ", [
+                SELECT * FROM tb_categories a INNER JOIN tb_productscategories b ON a.idcategory = b.idcategory WHERE b.idproduct = :idproduct
+            ", [
                 ':idproduct'=>$this->getidproduct()
             ]);
         }

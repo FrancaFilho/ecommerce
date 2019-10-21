@@ -4,7 +4,7 @@ namespace franca\DB;
 
 class Sql {
 
-	const HOSTNAME = "127.0.0.1";
+	const HOSTNAME = "localhost";
 	const USERNAME = "root";
 	const PASSWORD = "eam3gm";
 	const DBNAME   = "db_ecommerce";

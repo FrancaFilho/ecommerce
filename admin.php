@@ -1,6 +1,7 @@
 <?php 
 	use \franca\PageAdm;
 	use \franca\Model\User;
+	
 	$app->get('/adm', function() {
 		
 		User::verifyLogin();

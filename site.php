@@ -11,6 +11,7 @@ use \franca\Model\OrderStatus;
 $app->get('/', function() {
 	$products = Product::listAll();
 	$page = new Page();
+
 	$page->setTpl("index", [
 		'products'=>Product::checkList($products)
 	]);
@@ -57,6 +58,7 @@ $app->get("/cart", function(){
 		'error'=>Cart::getMsgError()
 	]);
 });
+
 $app->get("/cart/:idproduct/add", function($idproduct){
 	$product = new Product();
 	$product->get((int)$idproduct);
@@ -158,11 +160,13 @@ $app->post("/checkout", function(){
 		exit;
 	}
 	$user = User::getFromSession();
+
 	$address = new Address();
 	$_POST['deszipcode'] = $_POST['zipcode'];
 	$_POST['idperson'] = $user->getidperson();
-	$address->setData($_POST);
+	$address->setData($_POST);	
 	$address->save();
+
 	$cart = Cart::getFromSession();
 	$cart->getCalculateTotal();
 
@@ -175,6 +179,7 @@ $app->post("/checkout", function(){
 		'vltotal'=>$cart->getvltotal()
 	]);
 	$order->save();
+
 	switch ((int)$_POST['payment-method']) {
 		case 1:
 		header("Location: /order/".$order->getidorder()."/pagseguro");

@@ -38,7 +38,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {loop=$products}
+                                    {loop="$products"}
                                     <tr class="cart_item">
                                         <td class="product-remove">
                                             <a title="Remove this item" class="remove" href="/cart/{$value.idproduct}/remove">×</a> 
@@ -54,7 +54,7 @@
                                         </td>
 
                                         <td class="product-price">
-                                            <span class="amount">R$ {function = "formatPrice($value.vlprice)"}</span> 
+                                            <span class="amount">R$ {function="formatPrice($value.vlprice)"}</span> 
                                         </td>
 
                                         <td class="product-quantity">
@@ -69,7 +69,7 @@
                                         </td>
 
                                         <td class="product-subtotal">
-                                            <span class="amount">R$ {function = "formatPrice($value.vltotal)"}</span> 
+                                            <span class="amount">R$ {function="formatPrice($value.vltotal)"}</span> 
                                         </td>
                                     </tr>
                                     {/loop}
@@ -98,17 +98,17 @@
                                         <tbody>
                                             <tr class="cart-subtotal">
                                                 <th>Subtotal</th>
-                                                <td><span class="amount">R$ {function = "formatPrice($cart.vlsubtotal)"}</span></td>
+                                                <td><span class="amount">R$ {function="formatPrice($cart.vlsubtotal)"}</span></td>
                                             </tr>
 
                                             <tr class="shipping">
                                                 <th>Frete</th>
-                                                <td>R$ {function = "formatPrice($cart.vlfreight)"} {if="$cart.nrdays > 0"}<small>prazo de {$cart.nrdays} dia(s)</small>{/if}</td>
+                                                <td>R$ {function="formatPrice($cart.vlfreight)"} {if="$cart.nrdays > 0"}<small>prazo de {$cart.nrdays} dia(s)</small>{/if}</td>
                                             </tr>
 
                                             <tr class="order-total">
                                                 <th>Total</th>
-                                                <td><strong><span class="amount">R$ {function = "formatPrice($cart.vltotal)"}</span></strong> </td>
+                                                <td><strong><span class="amount">R$ {function="formatPrice($cart.vltotal)"}</span></strong> </td>
                                             </tr>
                                         </tbody>
                                     </table>

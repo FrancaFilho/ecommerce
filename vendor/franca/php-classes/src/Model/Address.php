@@ -2,9 +2,10 @@
 
 	namespace franca\Model;
 
-	use \franca\DB\Sql;
+use Exception;
+use \franca\DB\Sql;
 	use \franca\Model;
-	class Address extends Model {
+	class Address extends Model{
 		const SESSION_ERROR = "AddressError";
 		
 		public static function getCEP($nrcep)
@@ -34,20 +35,30 @@
 		public function save()
 		{
 			$sql = new Sql();
-			$results = $sql->select("CALL sp_addresses_save(:idaddress, :idperson, :desaddress, 
-			:desnumber, :descomplement, :descity, :desstate, :descountry, 
-			:deszipcode, :desdistrict)", [
-				':idaddress'=>$this->getidaddress(),
-				':idperson'=>$this->getidperson(),
+			$results = $sql->select("CALL sp_addresses_save(			
+				:idaddress, 
+				:idperson,
+				:desaddress,
+				:desnumber,
+				:descomplement,
+				:descity,
+				:desstate,
+				:descountry,
+				:deszipcode,
+				:desdistrict)"
+				, [
+				':idaddress'=>(int)$this->getidaddress(),
+				':idperson'=>(int)$this->getidperson(),
 				':desaddress'=>utf8_decode($this->getdesaddress()),
 				':desnumber'=>$this->getdesnumber(),
 				':descomplement'=>utf8_decode($this->getdescomplement()),
-				':descity'=>utf8_decode($this->getdescity()),
+				':descity'=>$this->getdescity(),
 				':desstate'=>utf8_decode($this->getdesstate()),
 				':descountry'=>utf8_decode($this->getdescountry()),
 				':deszipcode'=>$this->getdeszipcode(),
 				':desdistrict'=>$this->getdesdistrict()
 			]);
+
 			if (count($results) > 0) {
 				$this->setData($results[0]);
 			}
