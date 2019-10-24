@@ -78,29 +78,31 @@
 
         public function setPhoto($file)
         {
-            $extension = explode('.', $file['name']);
-            $extension = end($extension);
-            switch ($extension) {
-                case "jpg":
-                case "jpeg":
-                $image = imagecreatefromjpeg($file["tmp_name"]);
-                break;
-                case "gif":
-                $image = imagecreatefromgif($file["tmp_name"]);
-                break;
-                case "png":
-                $image = imagecreatefrompng($file["tmp_name"]);
-                break;
+            if ($file['name']!="" || $file['name'] != NULL){
+                $extension = explode('.', $file['name']);
+                $extension = end($extension);
+                switch ($extension) {
+                    case "jpg":
+                    case "jpeg":
+                    $image = imagecreatefromjpeg($file["tmp_name"]);
+                    break;
+                    case "gif":
+                    $image = imagecreatefromgif($file["tmp_name"]);
+                    break;
+                    case "png":
+                    $image = imagecreatefrompng($file["tmp_name"]);
+                    break;
+                }
+                $dist = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 
+                    "res" . DIRECTORY_SEPARATOR . 
+                    "site" . DIRECTORY_SEPARATOR . 
+                    "img" . DIRECTORY_SEPARATOR . 
+                    "products" . DIRECTORY_SEPARATOR . 
+                    $this->getidproduct() . ".jpg";
+                imagejpeg($image, $dist);
+                imagedestroy($image);
+                $this->checkPhoto();
             }
-            $dist = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 
-                "res" . DIRECTORY_SEPARATOR . 
-                "site" . DIRECTORY_SEPARATOR . 
-                "img" . DIRECTORY_SEPARATOR . 
-                "products" . DIRECTORY_SEPARATOR . 
-                $this->getidproduct() . ".jpg";
-            imagejpeg($image, $dist);
-            imagedestroy($image);
-            $this->checkPhoto();
         }
         public function getFromURL($desurl)
         {
